@@ -85,7 +85,7 @@
         android:layout_height="268dp"
         android:layout_marginTop="70dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/logo"
+        android:src="@drawable/ic_car"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
