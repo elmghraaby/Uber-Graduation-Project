@@ -13,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="102dp"
-        android:layout_marginEnd="20sp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="20sp"
         android:fontFamily="@font/poppins_semibold"
         android:includeFontPadding="false"
@@ -81,11 +81,11 @@
 
     <ImageView
         android:id="@+id/onboarding_image"
-        android:layout_width="212dp"
+        android:layout_width="170dp"
         android:layout_height="268dp"
         android:layout_marginTop="70dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/employeetravel"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

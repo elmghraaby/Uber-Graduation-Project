@@ -81,11 +81,11 @@
 
     <ImageView
         android:id="@+id/onboarding_image"
-        android:layout_width="212dp"
+        android:layout_width="170dp"
         android:layout_height="268dp"
         android:layout_marginTop="70dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ridecoordinator"
+        android:src="@drawable/logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
