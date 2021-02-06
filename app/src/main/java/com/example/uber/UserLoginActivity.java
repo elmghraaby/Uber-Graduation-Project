@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -55,29 +56,41 @@ public class UserLoginActivity extends AppCompatActivity {
         mRegistration = (Button) findViewById(R.id.registration_button);
 
 
-        mRegistration.setOnClickListener(v -> {
-            final String email = mEmail.getText().toString();
-            final String password = mPassword.getText().toString();
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(UserLoginActivity.this, task -> {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(UserLoginActivity.this, "Sign up error", Toast.LENGTH_SHORT).show();
-                } else {
-                    String user_id = mAuth.getCurrentUser().getUid();
-                    DatabaseReference current_user_id = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
-                    current_user_id.setValue(true);
-                }
+        mRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = mEmail.getText().toString();
+                final String password = mPassword.getText().toString();
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(UserLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(UserLoginActivity.this, "Sign up error", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String user_id = mAuth.getCurrentUser().getUid();
+                            DatabaseReference current_user_id = FirebaseDatabase.getInstance().getReference().child("Users").child("Customers").child(user_id);
+                            current_user_id.setValue(true);
+                        }
 
-            });
+                    }
+                });
+            }
         });
 
-        mLogin.setOnClickListener(v -> {
-            final String email = mEmail.getText().toString();
-            final String password = mPassword.getText().toString();
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(UserLoginActivity.this, task -> {
-                if (!task.isSuccessful()) {
-                    Toast.makeText(UserLoginActivity.this, "Sign in error", Toast.LENGTH_SHORT).show();
-                }
-            });
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = mEmail.getText().toString();
+                final String password = mPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(UserLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(UserLoginActivity.this, "Sign in error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
         });
 
     }

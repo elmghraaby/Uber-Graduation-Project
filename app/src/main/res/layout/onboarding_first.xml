@@ -84,8 +84,8 @@
         android:layout_width="212dp"
         android:layout_height="268dp"
         android:layout_marginTop="70dp"
-        android:scaleType="fitStart"
-        android:src="@drawable/logo_dont"
+        android:scaleType="fitCenter"
+        android:src="@drawable/employeetravel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

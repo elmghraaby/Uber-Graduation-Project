@@ -33,14 +33,17 @@ public class DriverLoginActivity extends AppCompatActivity {
         setContentView(R.layout.driver_login);
 
         mAuth = FirebaseAuth.getInstance();
-        firebaseAuthListener = firebaseAuth -> {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                Intent intent = new Intent(DriverLoginActivity.this, DriverMapActivity.class);
-                startActivity(intent);
-                finish();
-                return;
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(DriverLoginActivity.this, DriverMapActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
             }
         };
 
@@ -51,35 +54,41 @@ public class DriverLoginActivity extends AppCompatActivity {
         mRegistration = (Button) findViewById(R.id.registration_button);
 
 
-        mRegistration.setOnClickListener(v -> {
-            final String email = mEmail.getText().toString();
-            final String password = mPassword.getText().toString();
-            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (!task.isSuccessful()) {
-                        Toast.makeText(DriverLoginActivity.this, "Sign up error", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String user_id = mAuth.getCurrentUser().getUid();
-                        DatabaseReference current_user_id = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(user_id);
-                        current_user_id.setValue(true);
-                    }
+        mRegistration.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = mEmail.getText().toString();
+                final String password = mPassword.getText().toString();
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(DriverLoginActivity.this, "Sign up error", Toast.LENGTH_SHORT).show();
+                        } else {
+                            String user_id = mAuth.getCurrentUser().getUid();
+                            DatabaseReference current_user_id = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(user_id);
+                            current_user_id.setValue(true);
+                        }
 
-                }
-            });
+                    }
+                });
+            }
         });
 
-        mLogin.setOnClickListener(v -> {
-            final String email = mEmail.getText().toString();
-            final String password = mPassword.getText().toString();
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (!task.isSuccessful()) {
-                        Toast.makeText(DriverLoginActivity.this, "Sign in error", Toast.LENGTH_SHORT).show();
+        mLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String email = mEmail.getText().toString();
+                final String password = mPassword.getText().toString();
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(DriverLoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(DriverLoginActivity.this, "Sign in error", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                });
+            }
         });
 
     }

@@ -2,6 +2,10 @@
     <string name="app_name">Uber</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="onboarding1_title">aaaaaaaaaaa</string>
-    <string name="onboarding1_text">aaaaaaaaa</string>
+    <string name="onboarding1_title">Employee rides</string>
+    <string name="onboarding1_text">Take the work out of work-related trips. Create ground travel and commute programs for employees.</string>
+    <string name="onboarding2_title">Courtesy rides</string>
+    <string name="onboarding2_text">Aim to impress. Arrange door-to-door rides for your customers, clients, and guests.</string>
+    <string name="onboarding3_title">Our commitment to your safety</string>
+    <string name="onboarding3_text">We are committed to working to create a safe environment for our users.</string>
 </resources>
