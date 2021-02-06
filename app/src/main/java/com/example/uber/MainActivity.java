@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DriverLoginActivity.class);
                 startActivity(intent);
-                finish();
                 return;
             }
         });
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, UserLoginActivity.class);
                 startActivity(intent);
-                finish();
                 return;
             }
         });
